@@ -10,13 +10,21 @@ const road=new Road(carCanvas.width/2,carCanvas.width*0.9);
 
 const N=300;
 const cars=generateCars(N);
+const startingMutateAmount = 0.15
+const mutateConstantAmout = 0.000017
+let bestDistance
+let mutateAmout = startingMutateAmount
+
+
 let bestCar=cars[0];
 if(localStorage.getItem("bestBrain")){
+
     for(let i=0;i<cars.length;i++){
         cars[i].brain=JSON.parse(
             localStorage.getItem("bestBrain"));
         if(i!=0){
-            NeuralNetwork.mutate(cars[i].brain,0.13);
+            setMutateAmount()
+            NeuralNetwork.mutate(cars[i].brain, mutateAmout)
         }
     }
 }
@@ -30,17 +38,48 @@ const traffic=[
     new Car(road.getLaneCenter(1),-500,30,50,"DUMMY",2,getRandomColor()),
     new Car(road.getLaneCenter(1),-700,30,50,"DUMMY",2,getRandomColor()),
     new Car(road.getLaneCenter(2),-700,30,50,"DUMMY",2,getRandomColor()),
+
+    new Car(road.getLaneCenter(0),-1000,30,50,"DUMMY",2,getRandomColor()),
+    new Car(road.getLaneCenter(2),-1000,30,50,"DUMMY",2,getRandomColor()),
+    new Car(road.getLaneCenter(0),-1100,30,50,"DUMMY",2,getRandomColor()),
+    new Car(road.getLaneCenter(2),-1100,30,50,"DUMMY",2,getRandomColor()),
+    new Car(road.getLaneCenter(1),-1400,30,50,"DUMMY",2,getRandomColor()),
+    new Car(road.getLaneCenter(1),-1500,30,50,"DUMMY",2,getRandomColor()),
+    new Car(road.getLaneCenter(1),-1600,30,50,"DUMMY",2,getRandomColor()),
+    new Car(road.getLaneCenter(1),-1700,30,50,"DUMMY",2,getRandomColor()),
+    new Car(road.getLaneCenter(1),-1800,30,50,"DUMMY",2,getRandomColor()),
+
+    new Car(road.getLaneCenter(0),-1950,30,50,"DUMMY",2,getRandomColor()),
+    new Car(road.getLaneCenter(1),-2000,30,50,"DUMMY",2,getRandomColor()),
+    new Car(road.getLaneCenter(2),-2200,30,50,"DUMMY",2,getRandomColor()),
+    new Car(road.getLaneCenter(1),-2250,30,50,"DUMMY",2,getRandomColor()),
+    new Car(road.getLaneCenter(1),-2300,30,50,"DUMMY",2,getRandomColor()),
 ];
 
 animate();
 
+function setMutateAmount(){
+    bestDistance=localStorage.getItem("bestDistance")
+    mutateAmout = startingMutateAmount - (mutateConstantAmout*bestDistance)
+}
+
+function saveBestDistance(){
+    localStorage.setItem("bestDistance",
+        Math.abs(bestCar.y) 
+    )
+    console.log(localStorage.getItem("bestDistance"))
+}
+
 function save(){
     localStorage.setItem("bestBrain",
         JSON.stringify(bestCar.brain));
+    saveBestDistance()
 }
 
 function discard(){
     localStorage.removeItem("bestBrain");
+    localStorage.removeItem("bestDistance");
+
 }
 
 function generateCars(N){
