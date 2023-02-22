@@ -15,6 +15,10 @@ const mutateConstantAmout = 0.000017
 let bestDistance
 let mutateAmout = startingMutateAmount
 
+let currentGeneration = 0
+increaseCurrentGeneration()
+//document.getElementById('currentGeneration').innerHTML = currentGeneration;
+
 
 let bestCar=cars[0];
 if(localStorage.getItem("bestBrain")){
@@ -67,7 +71,12 @@ function saveBestDistance(){
     localStorage.setItem("bestDistance",
         Math.abs(bestCar.y) 
     )
-    console.log(localStorage.getItem("bestDistance"))
+}
+
+function increaseCurrentGeneration(){
+    currentGeneration = localStorage.getItem("currentGeneration")
+    localStorage.setItem("currentGeneration", currentGeneration+1)
+    currentGeneration = localStorage.getItem("currentGeneration")
 }
 
 function save(){

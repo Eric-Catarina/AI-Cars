@@ -11,6 +11,16 @@ body{
     display:flex;
     flex-direction:column;
 }
+#generalInfo{
+    display: flex;
+    flex-direction: column;
+    color:aliceblue;
+    margin: 100px;
+}
+
+h1{
+
+}
 
 button{
     border: none;
