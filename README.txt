@@ -1,4 +1,4 @@
-<h1>🚗Test it here: https://eric-catarina.github.io/AI-Cars/ 🚗</h1>
+🚗Test it here: https://eric-catarina.github.io/AI-Cars/ 🚗
 
 Instructions:
 
