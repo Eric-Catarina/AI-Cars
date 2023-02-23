@@ -13,12 +13,13 @@ const cars=generateCars(N);
 const startingMutateAmount = 0.15
 const mutateConstantAmout = 0.000017
 let bestDistance
-let mutateAmout = startingMutateAmount
+let mutateAmount = startingMutateAmount
 
 let currentGeneration = 0
 increaseCurrentGeneration()
 document.getElementById('currentGeneration').innerHTML = "Current generation: " + currentGeneration
 document.getElementById('bestDistance').innerHTML = "Best distance: " + Number(localStorage.getItem("bestDistance")).toFixed(1) + "m";
+document.getElementById('mutateAmount').innerHTML = "Mutate Amount: " + setMutateAmount().toFixed(3);
 
 
 let bestCar=cars[0];
@@ -29,7 +30,7 @@ if(localStorage.getItem("bestBrain")){
             localStorage.getItem("bestBrain"));
         if(i!=0){
             setMutateAmount()
-            NeuralNetwork.mutate(cars[i].brain, mutateAmout)
+            NeuralNetwork.mutate(cars[i].brain, mutateAmount)
         }
     }
 }
@@ -65,7 +66,8 @@ animate();
 
 function setMutateAmount(){
     bestDistance=localStorage.getItem("bestDistance")
-    mutateAmout = startingMutateAmount - (mutateConstantAmout*bestDistance)
+    mutateAmount = startingMutateAmount - (mutateConstantAmout*bestDistance)
+    return mutateAmount
 }
 
 function saveBestDistance(){
