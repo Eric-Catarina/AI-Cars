@@ -17,7 +17,8 @@ let mutateAmout = startingMutateAmount
 
 let currentGeneration = 0
 increaseCurrentGeneration()
-//document.getElementById('currentGeneration').innerHTML = currentGeneration;
+document.getElementById('currentGeneration').innerHTML = "Current generation: " + currentGeneration
+document.getElementById('bestDistance').innerHTML = "Best distance: " + Number(localStorage.getItem("bestDistance")).toFixed(1) + "m";
 
 
 let bestCar=cars[0];
@@ -74,7 +75,7 @@ function saveBestDistance(){
 }
 
 function increaseCurrentGeneration(){
-    currentGeneration = localStorage.getItem("currentGeneration")
+    currentGeneration = Number(localStorage.getItem("currentGeneration")) 
     localStorage.setItem("currentGeneration", currentGeneration+1)
     currentGeneration = localStorage.getItem("currentGeneration")
 }
@@ -88,7 +89,7 @@ function save(){
 function discard(){
     localStorage.removeItem("bestBrain");
     localStorage.removeItem("bestDistance");
-
+    localStorage.removeItem("currentGeneration")
 }
 
 function generateCars(N){
