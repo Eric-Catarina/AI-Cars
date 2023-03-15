@@ -1,6 +1,8 @@
+
+
 body{
     margin:0;
-    background:darkgray;
+    background:#0B3954;
     overflow:hidden;
     display:flex;
     justify-content:center;
@@ -19,7 +21,7 @@ body{
 }
 
 h1{
-
+color:#BFD7EA
 }
 
 button{
@@ -37,5 +39,5 @@ button:hover{
     background:black;
 }
 #carCanvas{
-    background:lightgray;
+    background:#087E8B;
 }
